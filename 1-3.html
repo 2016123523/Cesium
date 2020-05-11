@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1-2</title>
+	<script src="Cesium/Build/Cesium/Cesium.js"></script>
+	<link rel="stylesheet" href="Cesium/Build/Cesium/Widgets/widgets.css">
+</head>
+
+<body>
+	<select id="select">
+		<option value="" selected="selected">选择地图</option>
+		<option value="gdMap6">高德地图-6</option>
+		<option value="gdMap7">高德地图-7</option>
+		<option value="gdMap8">高德地图-8</option>
+		<option value="mp">MapBox</option>
+		<option value="T">天地图</option>
+		<option value="ggMap_Y">谷歌地图-Y</option>
+		<option value="ggMap_S">谷歌地图-S</option>
+		<option value="ggMap_M">谷歌地图-M</option>
+		<option value="ggMap_P">谷歌地图-P</option>
+		<option value="ggMap_T">谷歌地图-T</option>
+		<option value="ggMap_H">谷歌地图-H</option>
+		<option value="ggMap_R">谷歌地图-R</option>
+
+	</select>
+	<div id="cesiumContainer" style="width: 80%; height:600px"></div>
+</body>
+
+
+<script type="text/javascript">
+	Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmM2U3MGQxMC04YzFlLTQ3ZWEtYTlhNy02ZTliMTlkZmMzNzkiLCJpZCI6MjQ2NDgsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1ODU1NTQ1OTF9.Zw-KtDHixJ0yWFYE7WYPhgSwdwo8_fLAw3HJO_9l6-s';
+	let viewer = new Cesium.Viewer('cesiumContainer', {
+		show: false
+	});
+	viewer.imageryLayers.removeAll();
+
+	document.getElementById('select').onchange = changeLayers;
+
+	function changeLayers() {
+		if (this.value != '') {
+			viewer.imageryLayers.raiseToTop(viewer.imageryLayers.get(viewer.imageryLayers.indexOf(eval(this.value))));
+		}
+	}
+
+	let gdOption6 = {
+		url: 'http://wprd{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&scl=1&style=6',
+		subdomains: ['01', '02', '03', '04']
+	}
+	let gdMap6 = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(gdOption6));
+
+	let gdOption7 = {
+		url: 'http://wprd{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&scl=1&style=7',
+		subdomains: ['01', '02', '03', '04']
+	}
+	let gdMap7 = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(gdOption7));
+
+	let gdOption8 = {
+		url: 'http://wprd{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&scl=1&style=8',
+		subdomains: ['01', '02', '03', '04']
+	}
+	let gdMap8 = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(gdOption8));
+
+	let mapbox = new Cesium.MapboxImageryProvider({
+		mapId: 'mapbox.dark',
+		//streets  outdoors  light  dark  satellite
+		accessToken: 'pk.eyJ1IjoicXVlbnRpbmhlIiwiYSI6ImNrN3N6em1zMDA0M2YzbHAweGlyNGJ3aWYifQ.4e-sPRXzQPJ3eEpAg6mSoQ'
+	});
+	let mp = viewer.imageryLayers.addImageryProvider(mapbox);
+
+
+
+	let TMap = new Cesium.WebMapTileServiceImageryProvider({
+		url: 'http://t0.tianditu.gov.cn/img_w/wmts?tk=c651bb5ff75193582552ca5ca317415f',
+		layer: 'img',
+		style: 'default',
+		tileMatrixSetID: 'w',
+		format: 'tiles',
+		maximumLevel: 18
+	})
+	let T = viewer.imageryLayers.addImageryProvider(TMap);
+
+	let ggY = {
+		url: 'http://www.google.cn/maps/vt?lyrs=y&x={x}&y={y}&z={z}'
+	}
+	let ggMap_Y = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(ggY));
+
+	let ggM = {
+		url: 'http://www.google.cn/maps/vt?lyrs=m&x={x}&y={y}&z={z}'
+	}
+	let ggMap_M = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(ggM));
+
+	let ggS = {
+		url: 'http://www.google.cn/maps/vt?lyrs=s&x={x}&y={y}&z={z}'
+	}
+	let ggMap_S = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(ggS));
+
+	let ggT = {
+		url: 'http://www.google.cn/maps/vt?lyrs=t&x={x}&y={y}&z={z}'
+	}
+	let ggMap_T = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(ggT));
+
+	let ggH = {
+		url: 'http://www.google.cn/maps/vt?lyrs=h&x={x}&y={y}&z={z}'
+	}
+	let ggMap_H = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(ggH));
+
+	let ggP = {
+		url: 'http://www.google.cn/maps/vt?lyrs=p&x={x}&y={y}&z={z}'
+	}
+	let ggMap_P = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(ggP));
+
+	let ggR = {
+		url: 'http://www.google.cn/maps/vt?lyrs=r&x={x}&y={y}&z={z}'
+	}
+	let ggMap_R = viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider(ggR));
+</script>
+
+</html>
