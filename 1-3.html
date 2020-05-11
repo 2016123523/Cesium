@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>1-2</title>
-	<script src="Cesium/Build/Cesium/Cesium.js"></script>
-	<link rel="stylesheet" href="Cesium/Build/Cesium/Widgets/widgets.css">
+	link cesium.js
+	link cesium.css
 </head>
 
 <body>
@@ -32,7 +32,7 @@
 
 
 <script type="text/javascript">
-	Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmM2U3MGQxMC04YzFlLTQ3ZWEtYTlhNy02ZTliMTlkZmMzNzkiLCJpZCI6MjQ2NDgsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1ODU1NTQ1OTF9.Zw-KtDHixJ0yWFYE7WYPhgSwdwo8_fLAw3HJO_9l6-s';
+	Cesium.Ion.defaultAccessToken = 'your token';
 	let viewer = new Cesium.Viewer('cesiumContainer', {
 		show: false
 	});
@@ -67,14 +67,14 @@
 	let mapbox = new Cesium.MapboxImageryProvider({
 		mapId: 'mapbox.dark',
 		//streets  outdoors  light  dark  satellite
-		accessToken: 'pk.eyJ1IjoicXVlbnRpbmhlIiwiYSI6ImNrN3N6em1zMDA0M2YzbHAweGlyNGJ3aWYifQ.4e-sPRXzQPJ3eEpAg6mSoQ'
+		accessToken: 'your token'
 	});
 	let mp = viewer.imageryLayers.addImageryProvider(mapbox);
 
 
 
 	let TMap = new Cesium.WebMapTileServiceImageryProvider({
-		url: 'http://t0.tianditu.gov.cn/img_w/wmts?tk=c651bb5ff75193582552ca5ca317415f',
+		url: 'http://t0.tianditu.gov.cn/img_w/wmts?tk=your token',
 		layer: 'img',
 		style: 'default',
 		tileMatrixSetID: 'w',
